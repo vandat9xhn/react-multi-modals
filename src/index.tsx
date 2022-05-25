@@ -1,10 +1,16 @@
-import * as React from 'react'
-import styles from './styles.module.css'
+import Modal from './components/modal/Modal';
+import Portal from './components/portal/Portal';
 
-interface Props {
-  text: string
-}
+import { useModal } from './hooks/useModal';
+import { makeHiddenBefore, removeHiddenBefore } from './utils/hiddenBefore';
 
-export const ExampleComponent = ({ text }: Props) => {
-  return <div className={styles.test}>Example Component: {text}</div>
-}
+
+export {
+    Modal,
+    Portal,
+    // 
+    useModal,
+    //
+    makeHiddenBefore,
+    removeHiddenBefore
+};
