@@ -2,7 +2,8 @@ import Modal from './components/modal/Modal';
 import Portal from './components/portal/Portal';
 
 import { useModal } from './hooks/useModal';
-import { makeHiddenBefore, removeHiddenBefore } from './utils/hiddenBefore';
+import { makeHiddenBefore, removeHiddenBefore } from 'multi-modals';
+
 
 
 export {

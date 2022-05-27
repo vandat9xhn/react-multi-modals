@@ -1,9 +1,5 @@
 import { useLayoutEffect } from 'react';
-
-import { DATA_COUNT_MODAL, modalPosArr } from '../globalVariable';
-
-import { getLastModal } from '../utils/getLastModal';
-import { makeAppStyle, removeAppStyle } from '../utils/handleAppStyle';
+import { getUseModal } from 'multi-modals';
 
 //
 interface useModalProps {
@@ -24,48 +20,18 @@ export function useModal({
 }: useModalProps) {
     //
     useLayoutEffect(() => {
-        handleOpenModal();
+        const {handleMounted, handleBeforeUnmount} = getUseModal({
+            classAppModal,
+            zIndex,
+
+            handleClose,
+            handleOpen
+        });
+
+        handleMounted();
 
         return () => {
-            handleCloseModal();
+            handleBeforeUnmount();
         };
     }, []);
-
-    // ----
-
-    function handleOpenModal() {
-        if (modalPosArr.length === 0) {
-            makeAppStyle({
-                classAppModal: classAppModal,
-                zIndex: zIndex
-            });
-        }
-
-        const lastModal = getLastModal(classAppModal);
-        const x = window.scrollX;
-        const y = window.scrollY;
-
-        lastModal.setAttribute(DATA_COUNT_MODAL, '1');
-        lastModal.scrollTo(x, y);
-        window.scrollTo(0, 0);
-        modalPosArr.push({ x, y });
-
-        handleOpen && handleOpen();
-    }
-
-    function handleCloseModal() {
-        const lastModal = getLastModal(classAppModal);
-        const { x, y } = modalPosArr.slice(-1)[0];
-
-        handleClose && handleClose();
-        
-        lastModal.removeAttribute(DATA_COUNT_MODAL);
-        window.scrollTo(x, y);
-        modalPosArr.pop();
-
-        if (modalPosArr.length === 0) {
-            removeAppStyle();
-        }
-
-    }
 }

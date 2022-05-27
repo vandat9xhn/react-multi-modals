@@ -16,7 +16,7 @@ npm install --save react-multi-modals
 import React, { useState } from 'react';
 
 // import Modal from './components/modal/Modal';
-// import { makeHiddenBefore, removeHiddenBefore } from './utils/hiddenBefore';
+// import { makeHiddenBefore, removeHiddenBefore } from 'multi-modals';
 
 import {
     Modal,
